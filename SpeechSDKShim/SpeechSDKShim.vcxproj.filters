@@ -31,10 +31,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="exports.def">
+    <None Include="exports_x86.def">
       <Filter>Source Files</Filter>
     </None>
     <None Include="packages.config" />
+    <None Include="exports_x64.def">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resources.rc">
