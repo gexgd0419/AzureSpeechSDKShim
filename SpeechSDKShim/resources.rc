@@ -15,10 +15,10 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// 非特定语言 resources
+// 中文(简体) resources
 
-#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
-LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+LANGUAGE LANG_CHINESE, SUBLANG_NEUTRAL
 #pragma code_page(936)
 
 /////////////////////////////////////////////////////////////////////////////
@@ -51,24 +51,14 @@ BEGIN
             VALUE "ProductName", "NaturalVoiceSAPIAdapter"
             VALUE "ProductVersion", "0.1.0.0"
         END
-        BLOCK "000904b0"
-        BEGIN
-            VALUE "FileDescription", "Compatibility shim layer for Azure Speech SDK"
-            VALUE "FileVersion", "0.1.0.0"
-            VALUE "InternalName", "SpeechSDKShim.dll"
-            VALUE "LegalCopyright", "Copyright (C) 2024 by gexgd0419 on GitHub, MIT license"
-            VALUE "OriginalFilename", "SpeechSDKShim.dll"
-            VALUE "ProductName", "NaturalVoiceSAPIAdapter"
-            VALUE "ProductVersion", "0.1.0.0"
-        END
     END
     BLOCK "VarFileInfo"
     BEGIN
-        VALUE "Translation", 0x4, 1200, 0x9, 1200
+        VALUE "Translation", 0x4, 1200
     END
 END
 
-#endif    // 非特定语言 resources
+#endif    // 中文(简体) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
@@ -107,6 +97,54 @@ END
 #endif    // APSTUDIO_INVOKED
 
 #endif    // 中文(简体，中国) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// 英语(中性) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+LANGUAGE LANG_ENGLISH, SUBLANG_NEUTRAL
+#pragma code_page(1252)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 0,1,0,0
+ PRODUCTVERSION 0,1,0,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x40004L
+ FILETYPE 0x2L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "000904b0"
+        BEGIN
+            VALUE "FileDescription", "Compatibility shim layer for Azure Speech SDK"
+            VALUE "FileVersion", "0.1.0.0"
+            VALUE "InternalName", "SpeechSDKShim.dll"
+            VALUE "LegalCopyright", "Copyright (C) 2024 by gexgd0419 on GitHub, MIT license"
+            VALUE "OriginalFilename", "SpeechSDKShim.dll"
+            VALUE "ProductName", "NaturalVoiceSAPIAdapter"
+            VALUE "ProductVersion", "0.1.0.0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x9, 1200
+    END
+END
+
+#endif    // 英语(中性) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
