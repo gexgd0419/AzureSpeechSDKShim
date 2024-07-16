@@ -31,6 +31,12 @@ static BOOL CALLBACK DetourFileCallback(PVOID pContext, LPCSTR pszOrigFile, LPCS
         *ppszOutFile = "SpeechSDKShim.dll";
         *(bool*)pContext = true;
     }
+    else if (_strnicmp(pszOrigFile, "api-ms-win-crt-", 15) == 0 && _stricmp(pszFile, "ucrtbase.dll") != 0)
+    {
+        // Replace references to "API set" DLLs that usually points to ucrtbase.dll
+        *ppszOutFile = "ucrtbase.dll";
+        *(bool*)pContext = true;
+    }
 
     return TRUE;
 }
@@ -126,28 +132,30 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     if (paths.empty())
     {
         // no paths are provided through command line, add some default items
-        // including all SpeechSDK DLLs and msvcp140.dll
+        // including all SpeechSDK DLLs and some UCRT-related DLLs
+
         WCHAR path[MAX_PATH];
-        GetModuleFileNameW(nullptr, path, MAX_PATH);
+        if (GetModuleFileNameW(nullptr, path, MAX_PATH) == MAX_PATH)
+            return ERROR_FILENAME_EXCED_RANGE;
         PathRemoveFileSpecW(path);
-        PathAppendW(path, L"Microsoft.CognitiveServices.Speech.*.dll");
+        if (!SetCurrentDirectoryW(path))
+            return GetLastError();
 
-        WIN32_FIND_DATAW fd;
-        HANDLE hFind = FindFirstFileW(path, &fd);
-        if (hFind != INVALID_HANDLE_VALUE)
+        static const wchar_t* pathsToFind[] = { L"Microsoft.CognitiveServices.Speech.*.dll", L"msvcp140.dll",
+            L"msvcp140_codecvt_ids.dll", L"vcruntime140.dll", L"vcruntime140_1.dll", L"ucrtbase.dll"};
+        for (auto pathToFind : pathsToFind)
         {
-            do
+            WIN32_FIND_DATAW fd;
+            HANDLE hFind = FindFirstFileW(pathToFind, &fd);
+            if (hFind != INVALID_HANDLE_VALUE)
             {
-                PathRemoveFileSpecW(path);
-                PathAppendW(path, fd.cFileName);
-                paths.emplace_back(path);
-            } while (FindNextFileW(hFind, &fd));
-            FindClose(hFind);
+                do
+                {
+                    paths.emplace_back(fd.cFileName);
+                } while (FindNextFileW(hFind, &fd));
+                FindClose(hFind);
+            }
         }
-
-        PathRemoveFileSpecW(path);
-        PathAppendW(path, L"msvcp140.dll");
-        paths.emplace_back(path);
     }
 
     for (const auto& path : paths)
