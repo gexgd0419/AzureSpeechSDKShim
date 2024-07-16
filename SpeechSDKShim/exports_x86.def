@@ -221,8 +221,6 @@ EXPORTS
     SetProcessWorkingSetSizeEx = SetProcessWorkingSetSizeEx
     GetProcessWorkingSetSizeEx = GetProcessWorkingSetSizeEx
     GetTimeZoneInformationForYear = GetTimeZoneInformationForYear
-    SetProcessDEPPolicy = SetProcessDEPPolicy
-    GetSystemDEPPolicy = GetSystemDEPPolicy
     DisableThreadLibraryCalls = DisableThreadLibraryCalls
     RegDeleteKeyExA = RegDeleteKeyExA
     RegDeleteKeyExW = RegDeleteKeyExW
