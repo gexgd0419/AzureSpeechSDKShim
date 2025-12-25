@@ -16,12 +16,12 @@ env:
   # https://docs.github.com/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
   BUILD_CONFIGURATION: Release
 
-permissions:
-  contents: read
-
 jobs:
   build:
     runs-on: windows-latest
+
+    permissions:
+      contents: read
 
     strategy:
       matrix:
@@ -53,6 +53,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     # if: github.ref_type == 'tags'
+
+    permissions:
+      contents: write
+
     steps:
     - uses: actions/checkout@v4
 
