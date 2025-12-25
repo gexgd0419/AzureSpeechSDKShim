@@ -54,11 +54,15 @@ jobs:
     needs: build
     # if: github.ref_type == 'tags'
     steps:
+    - uses: actions/checkout@v4
+
     - name: Download all artifacts
       uses: actions/download-artifact@v7.0.0
+      with:
+        path: ${{github.workspace}}/artifacts
 
     - name: Create ZIP files
-      working-directory: ${{github.workspace}}
+      working-directory: ${{github.workspace}}/artifacts
       run: |
         ver="${{github.ref_name}}"
         ver="${ver//\//_}"
@@ -67,11 +71,13 @@ jobs:
         cd ../x64
         zip -mr ../AzureSpeechSDKShim_${ver}_x64.zip . -i "*.exe" "*.dll"
         cd ..
-        zip -r debug_symbols.zip x86 x64 -i "*.pdb"
+        zip -mr debug_symbols.zip x86 x64 -i "*.pdb"
 
-    - name: Upload artifact
-      uses: actions/upload-artifact@v6.0.0
+    - name: Create release
+      uses: softprops/action-gh-release@v2
       with:
-        name: release
-        path: .
+        draft: true
+        body_path: ${{github.workspace}}/release_notes.md
+        files: |
+          ${{github.workspace}}/artifacts/*.zip
       
