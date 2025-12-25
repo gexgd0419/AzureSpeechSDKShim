@@ -60,10 +60,12 @@ jobs:
     - name: Create ZIP files
       working-directory: ${{github.workspace}}
       run: |
+        ver="${{github.ref_name}}"
+        ver="${ver//\//_}"
         cd x86
-        zip -m ../AzureSpeechSDKShim_${{github.ref_name}}_x86.zip . -i "*.exe" "*.dll"
+        zip -m ../AzureSpeechSDKShim_${ver}_x86.zip . -i "*.exe" "*.dll"
         cd ../x64
-        zip -m ../AzureSpeechSDKShim_${{github.ref_name}}_x64.zip . -i "*.exe" "*.dll"
+        zip -m ../AzureSpeechSDKShim_${ver}_x64.zip . -i "*.exe" "*.dll"
         cd ..
         zip debug_symbols.zip x86 x64 -i "*.pdb"
 
