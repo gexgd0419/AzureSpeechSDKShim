@@ -302,8 +302,12 @@ EXPORTS
     RoRegisterForApartmentShutdown = RoRegisterForApartmentShutdown
     RoUnregisterForApartmentShutdown = RoUnregisterForApartmentShutdown
     RoGetApartmentIdentifier = RoGetApartmentIdentifier
+    RoFailFastWithErrorContext = RoFailFastWithErrorContext
     RoOriginateError = RoOriginateError
     RoOriginateErrorW = RoOriginateErrorW
+    RoOriginateLanguageException = RoOriginateLanguageException
+    RoTransformError = RoTransformError
+    RoTransformErrorW = RoTransformErrorW
     WindowsCreateString = WindowsCreateString
     WindowsCreateStringReference = WindowsCreateStringReference
     WindowsDeleteString = WindowsDeleteString
