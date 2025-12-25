@@ -63,11 +63,11 @@ jobs:
         ver="${{github.ref_name}}"
         ver="${ver//\//_}"
         cd x86
-        zip -m ../AzureSpeechSDKShim_${ver}_x86.zip . -i "*.exe" "*.dll"
+        zip -mr ../AzureSpeechSDKShim_${ver}_x86.zip . -i "*.exe" "*.dll"
         cd ../x64
-        zip -m ../AzureSpeechSDKShim_${ver}_x64.zip . -i "*.exe" "*.dll"
+        zip -mr ../AzureSpeechSDKShim_${ver}_x64.zip . -i "*.exe" "*.dll"
         cd ..
-        zip debug_symbols.zip x86 x64 -i "*.pdb"
+        zip -r debug_symbols.zip x86 x64 -i "*.pdb"
 
     - name: Upload artifact
       uses: actions/upload-artifact@v6.0.0
