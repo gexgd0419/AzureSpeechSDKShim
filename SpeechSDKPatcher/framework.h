@@ -24,5 +24,6 @@ typedef struct IUnknown IUnknown;
 #include <detours.h>
 #pragma comment (lib, "detours.lib")
 
+#include <memory>
 #include <vector>
 #include <string>
