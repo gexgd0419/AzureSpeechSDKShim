@@ -1,0 +1,87 @@
+name: MSBuild
+
+on:
+  push:
+    branches: [ "master" ]
+    tags: ["v[0-9]**"]
+  pull_request:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+env:
+  # Path to the solution file relative to the root of the project.
+  SOLUTION_FILE_PATH: .
+
+  # Configuration type to build.
+  # You can convert this to a build matrix if you need coverage of multiple configuration types.
+  # https://docs.github.com/actions/learn-github-actions/managing-complex-workflows#using-a-build-matrix
+  BUILD_CONFIGURATION: Release
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    permissions:
+      contents: read
+
+    strategy:
+      matrix:
+        platform: [x86, x64]
+
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Add MSBuild to PATH
+      uses: microsoft/setup-msbuild@v2
+
+    - name: Restore NuGet packages
+      working-directory: ${{github.workspace}}
+      run: nuget restore ${{env.SOLUTION_FILE_PATH}}
+
+    - name: Build
+      working-directory: ${{github.workspace}}
+      # Add additional options to the MSBuild command line here (like platform or verbosity level).
+      # See https://docs.microsoft.com/visualstudio/msbuild/msbuild-command-line-reference
+      run: msbuild /m /p:Configuration=${{env.BUILD_CONFIGURATION}} /p:Platform=${{matrix.platform}} /p:OutDir=${{github.workspace}}\out ${{env.SOLUTION_FILE_PATH}}
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v6
+      with:
+        name: ${{matrix.platform}}
+        path: out
+  
+  release:
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref_type == 'tag'
+
+    permissions:
+      contents: write
+
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Download all artifacts
+      uses: actions/download-artifact@v7
+      with:
+        path: ${{github.workspace}}/artifacts
+
+    - name: Create ZIP files
+      working-directory: ${{github.workspace}}/artifacts
+      run: |
+        ver="${{github.ref_name}}"
+        ver="${ver//\//_}"
+        cd x86
+        zip -mr ../AzureSpeechSDKShim_${ver}_x86.zip . -i "*.exe" "*.dll"
+        cd ../x64
+        zip -mr ../AzureSpeechSDKShim_${ver}_x64.zip . -i "*.exe" "*.dll"
+        cd ..
+        zip -mr debug_symbols.zip x86 x64 -i "*.pdb"
+
+    - name: Create release
+      uses: softprops/action-gh-release@v2
+      with:
+        body_path: ${{github.workspace}}/release_notes.md
+        files: |
+          ${{github.workspace}}/artifacts/*.zip
+      
