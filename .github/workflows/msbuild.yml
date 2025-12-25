@@ -24,13 +24,13 @@ jobs:
 
     strategy:
       matrix:
-        platform: [Win32, x64]
+        platform: [x86, x64]
 
     steps:
     - uses: actions/checkout@v4
 
     - name: Add MSBuild to PATH
-      uses: microsoft/setup-msbuild@v1.0.2
+      uses: microsoft/setup-msbuild@v2
 
     - name: Restore NuGet packages
       working-directory: ${{github.workspace}}
