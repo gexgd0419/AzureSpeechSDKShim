@@ -7,6 +7,7 @@ EXPORTS
     NCryptOpenStorageProvider = Shim_NCryptOpenStorageProvider
     NCryptImportKey = Shim_NCryptImportKey
     NCryptFreeObject = Shim_NCryptFreeObject
+    GetLogicalProcessorInformationEx = Shim_GetLogicalProcessorInformationEx
 
     ; handled by YY-thunks
     DecodePointer = DecodePointer
@@ -40,7 +41,6 @@ EXPORTS
     GetFinalPathNameByHandleA = GetFinalPathNameByHandleA
     GetFinalPathNameByHandleW = GetFinalPathNameByHandleW
     GetLogicalProcessorInformation = GetLogicalProcessorInformation
-    GetLogicalProcessorInformationEx = GetLogicalProcessorInformationEx
     GetNumaHighestNodeNumber = GetNumaHighestNodeNumber
     RaiseFailFastException = RaiseFailFastException
     GetThreadId = GetThreadId
