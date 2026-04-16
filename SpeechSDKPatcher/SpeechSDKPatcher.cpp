@@ -16,7 +16,13 @@ static bool ShouldReplaceImportFile(LPCSTR pszOrigFile)
     if (_strnicmp(pszOrigFile, "api-ms-win-core-", 16) == 0)
         return true;
 
-    static const char* dllnames[] = { "kernel32.dll", "advapi32.dll", "ncrypt.dll", "api-ms-win-eventing-provider-l1-1-0.dll" };
+    static const char* dllnames[] = {
+        "kernel32.dll",
+        "advapi32.dll",
+        "ncrypt.dll",
+        "bcrypt.dll",
+        "api-ms-win-eventing-provider-l1-1-0.dll",
+    };
     for (auto dllname : dllnames)
     {
         if (_stricmp(pszOrigFile, dllname) == 0)

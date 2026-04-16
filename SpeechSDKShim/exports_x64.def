@@ -316,6 +316,23 @@ EXPORTS
     WindowsIsStringEmpty = WindowsIsStringEmpty
     WindowsStringHasEmbeddedNull = WindowsStringHasEmbeddedNull
     WindowsCompareStringOrdinal = WindowsCompareStringOrdinal
+    BCryptOpenAlgorithmProvider = BCryptOpenAlgorithmProvider               
+    BCryptCloseAlgorithmProvider = BCryptCloseAlgorithmProvider              
+    BCryptGenRandom = BCryptGenRandom                           
+    BCryptGetProperty = BCryptGetProperty                         
+    BCryptSetProperty = BCryptSetProperty                         
+    BCryptCreateHash = BCryptCreateHash                          
+    BCryptDestroyHash = BCryptDestroyHash                         
+    BCryptHashData = BCryptHashData                            
+    BCryptFinishHash = BCryptFinishHash                          
+    BCryptDeriveKeyPBKDF2 = BCryptDeriveKeyPBKDF2                     
+    BCryptDeriveKeyCapi = BCryptDeriveKeyCapi                       
+    BCryptEncrypt = BCryptEncrypt                             
+    BCryptDecrypt = BCryptDecrypt                             
+    BCryptGenerateSymmetricKey = BCryptGenerateSymmetricKey                
+    BCryptDestroyKey = BCryptDestroyKey                          
+    BCryptExportKey = BCryptExportKey                           
+    BCryptImportKey = BCryptImportKey                           
 
     ; redirected to kernel32
     ActivateActCtx = kernel32.ActivateActCtx
