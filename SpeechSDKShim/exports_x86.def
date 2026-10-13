@@ -298,7 +298,7 @@ EXPORTS
     RoActivateInstance = RoActivateInstance
     RoRegisterActivationFactories = RoRegisterActivationFactories
     RoRevokeActivationFactories = RoRevokeActivationFactories
-    RoGetActivationFactory = RoGetActivationFactory
+    RoGetActivationFactory = _RoGetActivationFactory@12
     RoRegisterForApartmentShutdown = RoRegisterForApartmentShutdown
     RoUnregisterForApartmentShutdown = RoUnregisterForApartmentShutdown
     RoGetApartmentIdentifier = RoGetApartmentIdentifier
