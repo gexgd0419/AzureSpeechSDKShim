@@ -78,6 +78,8 @@ EXPORTS
     QueryFullProcessImageNameA = QueryFullProcessImageNameA
     QueryFullProcessImageNameW = QueryFullProcessImageNameW
     CreateFile2 = CreateFile2
+    CreateFile3 = CreateFile3
+    CopyFile2 = CopyFile2
     CreateEventExA = CreateEventExA
     CreateEventExW = CreateEventExW
     CreateMutexExA = CreateMutexExA
